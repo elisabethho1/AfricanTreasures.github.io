@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The African Treasure Store — Editorial Boutique</title>
+  <meta name="description" content="Authentic, handcrafted Maasai brass jewelry from Kenya. Editorial boutique layout, refined product imagery, and short video reels." />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#faf8f4; --ink:#131313; --muted:#6f6b67; --line:#e9e4db; --brass:#caa260; --brass-2:#e7d4a5;
+      --chip:#f2eee7; --chip-text:#3a362f; --danger:#b74a3f; --ok:#2d7a46;
+      --radius:18px; --shadow:0 22px 60px rgba(0,0,0,.14);
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:Inter,system-ui,sans-serif; color:var(--ink); background:var(--paper)}
+
+    /* Top */
+    .top{position:sticky; top:0; z-index:40; background:rgba(250,248,244,.8); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+    .wrap{max-width:1280px; margin:auto; padding:16px 22px; display:flex; align-items:center; gap:14px}
+    .brand{display:flex; align-items:baseline; gap:12px}
+    .badge{width:26px; height:26px; border-radius:50%; background:conic-gradient(from 130deg, var(--brass), var(--brass-2), var(--brass))}
+    h1{font-family:"Playfair Display",serif; font-size:26px; margin:0}
+    .nav{margin-left:auto; display:flex; gap:10px}
+    .nav a{color:var(--ink); text-decoration:none; font-weight:600; padding:10px 14px; border-radius:999px}
+    .nav a.active, .nav a:hover{background:var(--chip); color:var(--chip-text)}
+    .icon-btn{border:1px solid var(--line); background:#fff; border-radius:999px; padding:8px 12px; cursor:pointer}
+
+    /* Hero */
+    .hero{max-width:1280px; margin:36px auto 14px; padding:0 22px; display:grid; grid-template-columns:1.05fr .95fr; gap:26px}
+    .hero-copy{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:26px}
+    .eyebrow{letter-spacing:.16em; text-transform:uppercase; font-size:12px; color:#7b776f}
+    .headline{font-family:"Playfair Display",serif; font-size:54px; line-height:1.04; margin:8px 0 10px}
+    .sub{color:#4a4743}
+    .hero-visual{position:relative; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow)}
+    .hero-art{display:block; width:100%; height:100%; position:relative; background:linear-gradient(135deg,#151515,#2a2822)}
+    .hero-art::after{content:""; position:absolute; inset:0; background:
+      radial-gradient(600px 340px at 65% 55%, rgba(255,255,255,.06), transparent 60%),
+      radial-gradient(420px 260px at 70% 60%, rgba(255,255,255,.04), transparent 60%);}
+    .tag-chip{position:absolute; left:14px; top:14px; background:rgba(255,255,255,.9); border:1px solid var(--line); border-radius:999px; padding:6px 10px; font-size:12px}
+
+    /* Collections */
+    .collections{max-width:1280px; margin:16px auto 8px; padding:0 22px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .collection{position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); background:#fff; min-height:180px}
+    .collection .label{position:absolute; left:14px; bottom:12px; background:rgba(255,255,255,.92); border:1px solid var(--line); border-radius:10px; padding:6px 10px; font-weight:600}
+    .colImg{display:block; width:100%; height:180px; object-fit:cover}
+
+    /* Sections & grid */
+    .section{max-width:1280px; margin:18px auto 60px; padding:0 22px}
+    .section h2{font-family:"Playfair Display",serif; font-size:28px; margin:24px 0 10px}
+    .grid{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:18px}
+    @media(max-width:1100px){ .grid{grid-template-columns:repeat(3,1fr)} }
+    @media(max-width:780px){ .grid{grid-template-columns:repeat(2,1fr)} .hero{grid-template-columns:1fr} .collections{grid-template-columns:1fr 1fr} }
+    .card{background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:0 16px 40px rgba(0,0,0,.07)}
+    .imgwrap{aspect-ratio:4/5; background:#efe9de; overflow:hidden}
+    .imgwrap img{width:100%; height:100%; object-fit:cover; transform:scale(1.02); transition:transform .5s ease}
+    .card:hover .imgwrap img{transform:scale(1.06)}
+    .info{padding:12px 12px 16px}
+    .row{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .price{color:#8f5f3d; font-weight:800}
+    .small{font-size:12px; color:var(--muted)}
+    .edit-btn{display:none} body.admin-open .edit-btn{display:inline-flex}
+
+    /* Reels */
+    .reel{grid-column:1/-1; display:grid; grid-template-columns:1fr; gap:18px; align-items:stretch}
+    .reel .copy{background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px}
+    .reel h3{font-family:"Playfair Display",serif; font-size:32px; margin:6px 0}
+    .reel video, .reel img{width:100%; aspect-ratio:16/9; height:auto; display:block; border:1px solid var(--line); border-radius:16px; background:#0e0f10; object-fit:cover}
+    .kenburns{animation:ken 8s linear infinite; transform-origin:center}
+    @keyframes ken{0%{transform:scale(1) translate(0,0)} 50%{transform:scale(1.06) translate(2%, -2%)} 100%{transform:scale(1) translate(0,0)}}
+
+    /* Drawer */
+    .drawer{position:fixed; top:0; right:-420px; width:400px; height:100dvh; background:#101215; color:#f3f2ef; border-left:1px solid rgba(255,255,255,.08); padding:16px; transition:.25s ease; z-index:50; display:flex; flex-direction:column}
+    .drawer.open{right:0}
+    .cart-list{display:flex; flex-direction:column; gap:12px; overflow:auto; padding-right:4px}
+    .cart-row{display:grid; grid-template-columns: 64px 1fr auto; gap:10px; align-items:center; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:8px}
+    .cart-row img{width:64px; height:64px; object-fit:cover; border-radius:10px}
+
+    /* Admin */
+    .admin{position:fixed; inset:auto 22px 22px auto; width:560px; max-width:96vw; max-height:90vh; overflow:auto; background:#fff; border-radius:18px; box-shadow:var(--shadow); border:1px solid var(--line); display:none; z-index:60; scrollbar-color:#d9d2c6 transparent; scrollbar-width:thin}
+    .admin.open{display:block}
+    .admin header{display:flex; align-items:center; justify-content:space-between; gap:8px; padding:12px; border-bottom:1px solid var(--line)}
+    .admin .tabs{display:flex; gap:6px}
+    .tab{padding:8px 12px; border:1px solid var(--line); background:#fff; border-radius:999px; cursor:pointer}
+    .tab.active{background:var(--chip)}
+    .admin .content{padding:14px 16px; display:grid; gap:14px}
+    .section-box{border:1px dashed var(--line); border-radius:12px; padding:12px}
+    .row input,.row select,.row textarea{width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; font-family:inherit; background:#fff; color:#111}
+    .actions{display:flex; gap:8px; flex-wrap:wrap}
+    .admin-close{background:none; border:1px solid var(--line); padding:6px 10px; border-radius:999px; cursor:pointer}
+    .pill{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:12px; background:#fff}
+    .danger{color:#fff; background:var(--danger); border-color:transparent}
+    .ok{color:#fff; background:var(--ok); border-color:transparent}
+    .media-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
+    .media-tile{border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#fff}
+    .media-tile img,.media-tile video{width:100%; height:120px; object-fit:cover; display:block}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="wrap">
+      <div class="brand"><div class="badge"></div><h1>The African Treasure Store</h1></div>
+      <div class="nav" id="nav">
+        <a class="active" data-page="home" href="#home">Home</a>
+        <a data-page="products" href="#products">Products</a>
+        <a data-page="about" href="#about">About</a>
+        <button class="icon-btn" id="openCart">Cart <span id="cartCount">0</span></button>
+        <button class="icon-btn" id="adminToggle">Admin</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <article class="hero-copy">
+      <div class="eyebrow" id="heroEyebrow">Handcrafted in Kenya</div>
+      <div class="headline" id="heroHeadline">Brass. Bold. Maasai.</div>
+      <p class="sub" id="heroSub">Authentic jewelry by Maasai women. Every purchase supports a family of seven children and strengthens local communities through fair trade.</p>
+      <div class="cta">
+        <a class="icon-btn" href="#products">Shop collection</a>
+        <a class="icon-btn" href="#about">Our story</a>
+      </div>
+    </article>
+    <article class="hero-visual">
+      <span class="tag-chip">Signature look</span>
+      <div class="hero-art" aria-hidden="true"></div>
+    </article>
+  </section>
+
+  <!-- Collections strip -->
+  <div class="collections">
+    <div class="collection"><img class="colImg" data-cat="earrings" alt="Earrings"><span class="label">Earrings</span></div>
+    <div class="collection"><img class="colImg" data-cat="necklaces" alt="Necklaces"><span class="label">Necklaces</span></div>
+    <div class="collection"><img class="colImg" data-cat="bangles" alt="Bangles"><span class="label">Bangles</span></div>
+  </div>
+
+  <!-- Home -->
+  <section class="section" id="page-home">
+    <h2>New arrivals</h2>
+    <div class="grid" id="homeGrid"></div>
+  </section>
+
+  <!-- Products -->
+  <section class="section" id="page-products" hidden>
+    <h2>All products</h2>
+    <div class="grid" id="productsGrid"></div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="page-about" hidden>
+    <h2>About & Mission</h2>
+    <div class="about">
+      <div class="panel"><p id="missionText"><b>Offer a unique, sustainable collection of Maasai jewelry</b> crafted by talented Maasai women in Kenya, with a strong focus on ethical trade and social impact. Income supports the community, including a family of seven children.</p></div>
+      <div class="panel"><p id="aboutText">We empower women economically in Kenya and build a loyal customer base that values ethical and sustainable products. Your purchase creates real impact.</p></div>
+    </div>
+  </section>
+
+  <!-- Cart drawer -->
+  <div class="drawer" id="drawer">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:8px">
+      <h3>Cart</h3>
+      <button class="icon-btn" onclick="openDrawer(false)">Close ✕</button>
+    </div>
+    <div class="cart-list" id="cartList"></div>
+    <div style="margin-top:auto; display:grid; gap:10px">
+      <div class="row" style="display:flex; justify-content:space-between"><div>Total</div><div id="cartTotal">€0,00</div></div>
+      <button class="icon-btn" id="checkoutBtn">Checkout</button>
+      <div class="small">Demo checkout (no real payment).</div>
+    </div>
+  </div>
+
+  <!-- Checkout modal -->
+  <dialog id="checkoutDialog">
+    <form id="checkoutForm" method="dialog">
+      <h3>Checkout</h3>
+      <div class="row"><label>Name</label><input required name="name" placeholder="Full name"></div>
+      <div class="row"><label>Email</label><input required type="email" name="email" placeholder="you@example.com"></div>
+      <div class="row"><label>Address</label><input required name="address" placeholder="Street, nr, city"></div>
+      <div class="row"><label>Note</label><textarea name="note" rows="3" placeholder="Gift wrap, size, preference…"></textarea></div>
+      <div style="display:flex; gap:8px; margin-top:8px"><button class="icon-btn" value="cancel">Cancel</button><button class="icon-btn" value="confirm">Place order</button></div>
+    </form>
+  </dialog>
+
+  <!-- Admin panel (tabs) -->
+  <div class="admin" id="adminPanel" aria-live="polite">
+    <header>
+      <strong>Store Admin</strong>
+      <div style="display:flex; gap:8px; align-items:center">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="site" role="tab" aria-selected="true">Site</button>
+          <button class="tab" data-tab="products" role="tab">Products</button>
+          <button class="tab" data-tab="reels" role="tab">Reels</button>
+          <button class="tab" data-tab="media" role="tab">Media</button>
+        </div>
+        <button class="icon-btn" id="exportBtn" title="Export JSON" aria-label="Export data">⬇︎ Export</button>
+        <label class="icon-btn" for="importFile" style="cursor:pointer" title="Import JSON">⬆︎ Import</label>
+        <input id="importFile" type="file" accept="application/json" hidden>
+        <button class="admin-close" id="adminClose" title="Close">✕</button>
+      </div>
+    </header>
+
+    <!-- Tab: Site -->
+    <div class="content" data-tabpanel="site">
+      <div class="section-box">
+        <div class="row"><label>Store name</label><input id="brandInput" placeholder="The African Treasure Store"></div>
+      </div>
+      <div class="section-box">
+        <div class="row"><strong>Hero editor</strong></div>
+        <div class="row"><label>Eyebrow</label><input id="heroEyebrowInput" placeholder="Handcrafted in Kenya"></div>
+        <div class="row"><label>Headline</label><input id="heroHeadlineInput" placeholder="Brass. Bold. Maasai."></div>
+        <div class="row"><label>Sub copy</label><textarea id="heroSubInput" rows="3" placeholder="Authentic jewelry by Maasai women…"></textarea></div>
+        <div class="actions"><button class="icon-btn ok" id="saveHero">Save hero</button></div>
+      </div>
+      <div class="section-box">
+        <div class="row"><label>About</label><textarea id="aboutInput" rows="3"></textarea></div>
+        <div class="row"><label>Mission</label><textarea id="missionInput" rows="3"></textarea></div>
+      </div>
+    </div>
+
+    <!-- Tab: Products -->
+    <div class="content" data-tabpanel="products" hidden>
+      <div class="section-box">
+        <div class="row"><strong>Product editor</strong></div>
+        <div class="row"><input id="pName" placeholder="Name (e.g., Nairobi Hoop)"></div>
+        <div class="row" style="display:grid; grid-template-columns:1fr 1fr; gap:8px">
+          <select id="pCat">
+            <option value="earrings">Earrings</option>
+            <option value="necklaces">Necklaces</option>
+            <option value="bangles">Bangles</option>
+            <option value="rings">Rings</option>
+          </select>
+          <input id="pPrice" type="number" min="0" step="0.01" placeholder="Price (€)">
+        </div>
+        <div class="row"><textarea id="pDesc" rows="2" placeholder="Short description"></textarea></div>
+        <div class="row"><input id="pImg" type="file" accept="image/*"></div>
+        <img id="pPreview" alt="Preview" style="width:100%; height:auto; border:1px solid var(--line); border-radius:10px; display:none"/>
+        <div class="actions">
+          <button class="icon-btn" id="genNewImg">Generate image</button>
+          <button class="icon-btn" id="addProduct">Add</button>
+          <button class="icon-btn" id="cancelEdit" style="display:none">Cancel edit</button>
+          <button class="icon-btn danger" id="deleteProduct" style="display:none">Delete</button>
+        </div>
+        <div class="row"><button class="icon-btn" id="clearProducts" style="border-color:#f0e2d0">Remove ALL products</button></div>
+      </div>
+    </div>
+
+    <!-- Tab: Reels (add/edit/remove) -->
+    <div class="content" data-tabpanel="reels" hidden>
+      <div class="section-box">
+        <div class="row"><strong>Short reels</strong><span class="small" style="margin-left:auto">Add, edit, remove</span></div>
+        <div class="row"><input id="rTitle" placeholder="Title (e.g., Nairobi Hoop)"></div>
+        <div class="row"><textarea id="rDesc" rows="2" placeholder="Short description"></textarea></div>
+        <div class="row" style="display:grid; grid-template-columns:1fr 1fr; gap:8px">
+          <select id="rSourceType">
+            <option value="video">Upload video</option>
+            <option value="mediaImage">From media image (animated)</option>
+            <option value="mediaVideo">From media video</option>
+            <option value="productImage">From product image (animated)</option>
+          </select>
+          <select id="rLink" title="Link to product or media"><option value="">— select —</option></select>
+        </div>
+        <div class="row"><input id="rUpload" type="file" accept="video/*" hidden></div>
+        <div class="actions">
+          <button class="icon-btn ok" id="rAdd">Add reel</button>
+          <button class="icon-btn" id="rCancel" style="display:none">Cancel edit</button>
+          <button class="icon-btn danger" id="rDelete" style="display:none">Delete</button>
+        </div>
+        <div id="rPreviewWrap" style="width:100%;"><video id="rPreview" controls muted loop style="width:100%; aspect-ratio:16/9; border:1px solid var(--line); border-radius:12px; display:none"></video><img id="rPreviewImg" style="width:100%; aspect-ratio:16/9; border:1px solid var(--line); border-radius:12px; display:none"/></div>
+        <div class="row" style="margin-top:6px">
+          <span class="pill">Reel count: <span id="reelCount">0</span></span>
+          <button class="pill" id="rClear" style="margin-left:auto">Remove ALL reels</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Media -->
+    <div class="content" data-tabpanel="media" hidden>
+      <div class="section-box">
+        <div class="row"><strong>Media library</strong><span class="small" style="margin-left:auto">Images & videos</span></div>
+        <div class="actions">
+          <label class="icon-btn" for="mUploadImg" style="cursor:pointer">Upload image</label>
+          <input id="mUploadImg" type="file" accept="image/*" hidden>
+          <label class="icon-btn" for="mUploadVid" style="cursor:pointer">Upload video</label>
+          <input id="mUploadVid" type="file" accept="video/*" hidden>
+        </div>
+        <div class="media-grid" id="mediaGrid"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+  // ---------- Config ----------
+  const CURRENCY='€';
+  const KEY='ats_store_en_v7';
+  const initial={
+    brand:'The African Treasure Store',
+    about:'We empower Maasai women and create real social impact through ethical trade.',
+    mission:'Offer a unique, sustainable collection of Maasai jewelry with a strong focus on ethical trade. Proceeds support a family of seven children.',
+    hero:{ eyebrow:'Handcrafted in Kenya', headline:'Brass. Bold. Maasai.', sub:'Authentic jewelry by Maasai women. Every purchase supports a family of seven children and strengthens local communities through fair trade.' },
+    products:[
+      {id:'ear1',name:'Nairobi Hoop',cat:'earrings',price:39,img:'',desc:'Brass hoops with vibrant beads.'},
+      {id:'ear2',name:'Samburu Drop',cat:'earrings',price:45,img:'',desc:'Elegant drops — light & comfy.'},
+      {id:'nec1',name:'Maasai Layers',cat:'necklaces',price:79,img:'',desc:'Statement layered necklace.'},
+      {id:'nec2',name:'Savanna Chic',cat:'necklaces',price:69,img:'',desc:'Minimal piece with subtle beads.'},
+      {id:'ban1',name:'Serengeti Bangle',cat:'bangles',price:49,img:'',desc:'Stackable bangle in solid brass.'},
+      {id:'ban2',name:'Sunset Wave',cat:'bangles',price:54,img:'',desc:'Wavy profile, polished shine.'},
+      {id:'rin1',name:'Eldoret Ring',cat:'rings',price:29,img:'',desc:'Adjustable, hand-hammered ring.'},
+      {id:'rin2',name:'Kilimanjaro Crest',cat:'rings',price:34,img:'',desc:'Bold crest — culture meets chic.'}
+    ],
+    reels:[ /* {id,title,desc, kind:'video'|'image', src, refType?, refId? } */ ],
+    media:[ /* {id, type:'image'|'video', name, src} */ ],
+    cart:[]
+  };
+
+  let data = load();
+  const state={page:'home'};
+  let currentEditId=null, newImageDataURL='';
+  let currentReelId=null; let uploadedVideoURL=''; let selectedImageURL='';
+
+  const $=s=>document.querySelector(s); const $$=s=>Array.from(document.querySelectorAll(s));
+  function load(){ try{return JSON.parse(localStorage.getItem(KEY))||initial}catch(_){return initial} }
+  function save(){ localStorage.setItem(KEY, JSON.stringify(data)); }
+  function money(n){ return CURRENCY+Number(n).toFixed(2).replace('.',','); }
+
+  // ---------- SVG product art (no canvas) ----------
+  function svgProduct(cat,title){
+    const brass=getComputedStyle(document.documentElement).getPropertyValue('--brass').trim()||'#caa260';
+    const brass2=getComputedStyle(document.documentElement).getPropertyValue('--brass-2').trim()||'#e7d4a5';
+    const paper=getComputedStyle(document.documentElement).getPropertyValue('--paper').trim()||'#faf8f4';
+    const ink=getComputedStyle(document.documentElement).getPropertyValue('--ink').trim()||'#131313';
+    const w=800,h=1000;
+    const defs=`<defs><linearGradient id='gB' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='${brass}'/><stop offset='1' stop-color='${brass2}'/></linearGradient><radialGradient id='glow' cx='50%' cy='35%' r='65%'><stop offset='0%' stop-color='rgba(255,255,255,.55)'/><stop offset='100%' stop-color='rgba(255,255,255,0)'/></radialGradient></defs>`;
+    let fg='';
+    if(cat==='earrings'){
+      fg=`<g><circle cx='280' cy='540' r='170' stroke='url(#gB)' stroke-width='26' fill='none'/><circle cx='520' cy='540' r='120' stroke='url(#gB)' stroke-width='22' fill='none'/><circle cx='520' cy='700' r='14' fill='${ink}'/></g>`;
+    } else if(cat==='necklaces'){
+      fg=`<g><path d='M140 380 q260 220 520 0' stroke='url(#gB)' stroke-width='28' fill='none' stroke-linecap='round'/><path d='M170 440 q230 200 460 0' stroke='${ink}' stroke-width='10' fill='none' stroke-linecap='round'/><circle cx='400' cy='590' r='22' fill='url(#gB)'/></g>`;
+    } else if(cat==='bangles'){
+      fg=`<g><ellipse cx='410' cy='620' rx='240' ry='80' fill='none' stroke='url(#gB)' stroke-width='24'/><ellipse cx='410' cy='700' rx='220' ry='72' fill='none' stroke='${ink}' stroke-width='16'/><ellipse cx='410' cy='780' rx='200' ry='66' fill='none' stroke='url(#gB)' stroke-width='18'/></g>`;
+    } else {
+      fg=`<g><circle cx='420' cy='640' r='140' stroke='url(#gB)' stroke-width='30' fill='none'/><circle cx='420' cy='640' r='52' fill='${paper}'/><circle cx='420' cy='500' r='24' fill='${ink}'/></g>`;
+    }
+    const svg=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}'><rect width='100%' height='100%' fill='#efe9de'/>${defs}<ellipse cx='400' cy='520' rx='360' ry='380' fill='url(#glow)' opacity='.35'/>${fg}<text x='60' y='120' font-family='Playfair Display, serif' font-size='46' fill='${ink}' font-weight='700'>${title}</text></svg>`;
+    return 'data:image/svg+xml;utf8,'+encodeURIComponent(svg);
+  }
+
+  // ---------- Render helpers ----------
+  function label(cat){ return ({earrings:'Earrings',necklaces:'Necklaces',bangles:'Bangles',rings:'Rings'})[cat]||cat; }
+  function cardHTML(p){
+    return `<article class="card"><div class="imgwrap">${p.img?`<img alt="${p.name}" src="${p.img}">`:`<div class='small' style='padding:20px'>(add image)</div>`}</div><div class="info"><div class="row"><div><strong>${p.name}</strong><div class="small">${label(p.cat)}</div></div><div class="price">${money(p.price)}</div></div><p class="small">${p.desc||''}</p><div style="display:flex; gap:8px; margin-top:6px"><button class="icon-btn edit-btn" onclick="editProduct('${p.id}')">Edit</button><button class="icon-btn" onclick="quickView('${p.id}')">Details</button><button class="icon-btn" onclick="addToCart('${p.id}')">Add to cart</button></div></div></article>`;
+  }
+  function reelBlockHTML(r, fallbackProduct){
+    const title=r.title||fallbackProduct?.name||'Our Craft';
+    const desc=r.desc||fallbackProduct?.desc||'Handcrafted brass with cultural detail.';
+    const mediaNode = r.kind==='video'
+      ? `<video src="${r.src}" autoplay muted loop playsinline controls></video>`
+      : `<img src="${r.src}" alt="${title}" class="kenburns">`;
+    return `<div class="reel" data-reel-id="${r.id}"><div class="copy"><div class="eyebrow">Short reel</div><h3>${title}</h3><p class="small">${desc}</p><div style="display:flex; gap:8px; margin-top:8px"><button class="icon-btn edit-btn" onclick="editReel('${r.id}')">Edit</button></div></div>${mediaNode}</div>`;
+  }
+
+  function renderGrid(where){
+    const grid=document.getElementById(where);
+    const products=data.products.slice();
+    const reels=data.reels.slice();
+    const blocks=[];
+    let ri=0;
+    for(let i=0;i<products.length;i++){
+      blocks.push(products[i]);
+      if((i+1)%4===0 && reels.length){
+        blocks.push({__reel:true, reel: reels[ri%reels.length], pick:products[Math.max(0,i-1)]});
+        ri++;
+      }
+    }
+    grid.innerHTML=blocks.map(b=> b.__reel?reelBlockHTML(b.reel,b.pick):cardHTML(b)).join('');
+  }
+
+  // ---------- Cart ----------
+  function addToCart(id){ const it=data.cart.find(i=>i.id===id); if(it) it.qty++; else data.cart.push({id,qty:1}); save(); renderCart(); openDrawer(true); }
+  function removeFromCart(id){ data.cart=data.cart.filter(i=>i.id!==id); save(); renderCart(); }
+  function setQty(id,q){ const it=data.cart.find(i=>i.id===id); if(it){ it.qty=Math.max(1,q); save(); renderCart(); } }
+  function renderCart(){
+    const list=$('#cartList');
+    const count=data.cart.reduce((s,i)=>s+i.qty,0);
+    const total=data.cart.reduce((s,i)=>{ const p=data.products.find(p=>p.id===i.id); return s+(p?p.price*i.qty:0); },0);
+    $('#cartCount').textContent=count; $('#cartTotal').textContent=money(total);
+    list.innerHTML=data.cart.map(i=>{
+      const p=data.products.find(p=>p.id===i.id); if(!p) return '';
+      return `<div class="cart-row"><img src="${p.img}" alt="${p.name}"><div><div style="font-weight:600">${p.name}</div><div class="small">${label(p.cat)}</div><div>${money(p.price)}</div></div><div style="text-align:right"><div style="display:flex; gap:6px; justify-content:flex-end"><button class="icon-btn" onclick="setQty('${i.id}',${i.qty-1})">−</button><span>${i.qty}</span><button class="icon-btn" onclick="setQty('${i.id}',${i.qty+1})">+</button></div><button class="icon-btn" style="margin-top:8px" onclick="removeFromCart('${i.id}')">Remove</button></div></div>`;
+    }).join('')||'<div class="small">Your cart is empty.</div>';
+  }
+  function openDrawer(open=true){ $('#drawer').classList.toggle('open',open); }
+
+  // ---------- Quick view & checkout ----------
+  function quickView(id){
+    const p=data.products.find(x=>x.id===id); if(!p) return;
+    const dlg=$('#checkoutDialog');
+    dlg.innerHTML=`<form method='dialog'><h3>${p.name}</h3><div class='small'>${label(p.cat)} • ${money(p.price)}</div><div style='display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:10px 0'><img src='${p.img}' style='width:100%; border-radius:12px' alt='${p.name}'><div><p>${p.desc||''}</p><button class='icon-btn' value='close' onclick="addToCart('${p.id}')">Add to cart</button></div></div><div style='display:flex; gap:8px; margin-top:6px'><button class='icon-btn' value='cancel'>Close</button></div></form>`;
+    dlg.showModal();
+  }
+  $('#checkoutBtn').onclick=()=>{ const dlg=$('#checkoutDialog'); dlg.innerHTML=$('#checkoutForm').outerHTML; dlg.showModal(); };
+  $('#checkoutDialog').addEventListener('close', function(){
+    if(this.returnValue==='confirm'){
+      const form=this.querySelector('form');
+      const d=Object.fromEntries(new FormData(form).entries());
+      const summary=data.cart.map(i=>{ const p=data.products.find(x=>x.id===i.id); return `${i.qty}× ${p?.name}`;}).join(', ');
+      alert(`Thanks ${d.name}!\n\nYour order: ${summary}\nWe will email ${d.email} with payment & shipping details.`);
+      data.cart=[]; save(); renderCart(); openDrawer(false);
+    }
+  });
+
+  // ---------- Admin shell & tabs ----------
+  const adminPanel=$('#adminPanel');
+  $('#adminToggle').onclick=()=>{ const isOpen=adminPanel.classList.contains('open'); adminPanel.classList.toggle('open',!isOpen); document.body.classList.toggle('admin-open',!isOpen); };
+  $('#adminClose').onclick=()=>{ adminPanel.classList.remove('open'); document.body.classList.remove('admin-open'); };
+  $$('.tab').forEach(t=> t.addEventListener('click',()=>{
+    const name=t.dataset.tab;
+    $$('.tab').forEach(x=>x.classList.toggle('active', x===t));
+    $$('[data-tabpanel]').forEach(p=>{ p.hidden = p.getAttribute('data-tabpanel')!==name; });
+  }));
+
+  // ----- Site tab bindings -----
+  $('#brandInput').addEventListener('input', e=>{ data.brand=e.target.value; document.querySelector('.brand h1').textContent=data.brand; save(); });
+  $('#aboutInput').addEventListener('input', e=>{ data.about=e.target.value; $('#aboutText')?.textContent=data.about; save(); });
+  $('#missionInput').addEventListener('input', e=>{ data.mission=e.target.value; $('#missionText')?.textContent=data.mission; save(); });
+  $('#heroEyebrowInput').addEventListener('input', e=>{ data.hero.eyebrow=e.target.value; $('#heroEyebrow').textContent=data.hero.eyebrow; save(); });
+  $('#heroHeadlineInput').addEventListener('input', e=>{ data.hero.headline=e.target.value; $('#heroHeadline').textContent=data.hero.headline; save(); });
+  $('#heroSubInput').addEventListener('input', e=>{ data.hero.sub=e.target.value; $('#heroSub').textContent=data.hero.sub; save(); });
+  $('#saveHero').onclick=()=>{ alert('Hero saved'); };
+
+  // ----- Products tab -----
+  $('#pImg').addEventListener('change', async e=>{ const f=e.target.files[0]; if(!f) return; newImageDataURL=await fileToDataURL(f); showPreview(newImageDataURL); });
+  $('#genNewImg').onclick=()=>{ const name=$('#pName').value||'New piece'; const cat=$('#pCat').value; newImageDataURL=svgProduct(cat,name); showPreview(newImageDataURL); };
+
+  function showPreview(src){ const img=$('#pPreview'); img.src=src; img.style.display='block'; }
+  async function buildProductFromInputs(existingId, forPreviewOnly=false){
+    const name=$('#pName').value.trim(); const cat=$('#pCat').value; const price=parseFloat($('#pPrice').value||'0'); const desc=$('#pDesc').value.trim(); let img=newImageDataURL;
+    if(!name && !forPreviewOnly){ alert('Name is required'); return null }
+    return { id: existingId||id(), name: name||'Preview', cat, price, desc, img: img||svgProduct(cat, name||'Preview') };
+  }
+
+  $('#addProduct').onclick=async()=>{
+    const p=await buildProductFromInputs(currentEditId);
+    if(!p) return;
+    if(currentEditId){
+      const idx=data.products.findIndex(x=>x.id===currentEditId);
+      if(idx>-1) data.products[idx]={...data.products[idx], ...p};
+      exitEdit();
+    } else {
+      data.products.unshift(p);
+    }
+    save(); newImageDataURL=''; clearForm(); renderAll();
+  };
+  $('#deleteProduct').onclick=()=>{
+    if(!currentEditId) return;
+    if(!confirm('Delete this product?')) return;
+    data.products=data.products.filter(p=>p.id!==currentEditId);
+    save(); exitEdit(); clearForm(); renderAll();
+  };
+  $('#cancelEdit').onclick=()=>{ exitEdit(); clearForm(); };
+
+  function editProduct(id){
+    const p=data.products.find(x=>x.id===id); if(!p) return;
+    currentEditId=id; openAdminTab('products');
+    $('#pName').value=p.name; $('#pCat').value=p.cat; $('#pPrice').value=p.price; $('#pDesc').value=p.desc;
+    newImageDataURL=p.img||''; if(newImageDataURL) showPreview(newImageDataURL);
+    $('#addProduct').textContent='Save'; $('#cancelEdit').style.display='inline-flex'; $('#deleteProduct').style.display='inline-flex';
+    adminPanel.classList.add('open'); document.body.classList.add('admin-open');
+  }
+  function exitEdit(){ currentEditId=null; $('#addProduct').textContent='Add'; $('#cancelEdit').style.display='none'; $('#deleteProduct').style.display='none'; $('#pPreview').style.display='none'; }
+  function clearForm(){ $('#pName').value=''; $('#pCat').value='earrings'; $('#pPrice').value=''; $('#pDesc').value=''; $('#pImg').value=''; newImageDataURL=''; $('#pPreview').style.display='none'; }
+  $('#clearProducts').onclick=()=>{ if(confirm('Remove all products?')){ data.products=[]; save(); renderAll(); }};
+
+  // ----- Reels tab (no canvas, video or animated image) -----
+  function refreshReelSelects(){
+    const sel=$('#rLink'); sel.innerHTML='<option value="">— select —</option>';
+    const type=$('#rSourceType').value;
+    if(type==='mediaImage' || type==='mediaVideo'){
+      data.media.filter(m=> type==='mediaImage'? m.type==='image' : m.type==='video')
+        .forEach(m=> sel.insertAdjacentHTML('beforeend', `<option value="${m.id}">${m.type==='video'?'🎞️':'🖼️'} ${m.name||m.id}</option>`));
+    } else if(type==='productImage'){
+      data.products.forEach(p=> sel.insertAdjacentHTML('beforeend', `<option value="p:${p.id}">🧿 ${p.name}</option>`));
+    } else if(type==='video'){
+      sel.innerHTML='<option value="">Use file picker…</option>';
+    }
+  }
+  $('#rSourceType').addEventListener('change',()=>{
+    refreshReelSelects();
+    $('#rUpload').hidden=$('#rSourceType').value!=='video';
+    $('#rPreview').style.display='none'; $('#rPreviewImg').style.display='none';
+    uploadedVideoURL=''; selectedImageURL='';
+  });
+  $('#rUpload').addEventListener('change', e=>{
+    const f=e.target.files[0]; if(!f) return;
+    const url=URL.createObjectURL(f);
+    const v=$('#rPreview'); v.src=url; v.style.display='block'; v.play();
+    uploadedVideoURL=url; selectedImageURL='';
+  });
+
+  $('#rAdd').onclick=()=>{
+    const title=$('#rTitle').value.trim()||'Our Craft';
+    const desc=$('#rDesc').value.trim();
+    const type=$('#rSourceType').value;
+    const link=$('#rLink').value;
+    let reel={id:id(), title, desc};
+
+    if(type==='video' && uploadedVideoURL){ reel.kind='video'; reel.src=uploadedVideoURL; }
+    else if(type==='mediaVideo' && link){ const m=data.media.find(x=>x.id===link); if(m){ reel.kind='video'; reel.src=m.src; } }
+    else if(type==='mediaImage' && link){ const m=data.media.find(x=>x.id===link); if(m){ reel.kind='image'; reel.src=m.src; } }
+    else if(type==='productImage' && link.startsWith('p:')){ const pid=link.slice(2); const p=data.products.find(x=>x.id===pid); if(p){ reel.kind='image'; reel.src=p.img; reel.refType='product'; reel.refId=p.id; } }
+    else { alert('Select a source for the reel'); return; }
+
+    data.reels.unshift(reel); save(); renderAll(); updateReelCount(); clearReelForm(); alert('Reel added');
+  };
+
+  function editReel(rid){
+    const r=data.reels.find(x=>x.id===rid); if(!r) return;
+    currentReelId=rid; openAdminTab('reels');
+    $('#rTitle').value=r.title||''; $('#rDesc').value=r.desc||'';
+    if(r.kind==='video'){ $('#rSourceType').value='mediaVideo'; }
+    else { $('#rSourceType').value= r.refType==='product' ? 'productImage' : 'mediaImage'; }
+    refreshReelSelects();
+    if(r.refType==='product'&&r.refId){ $('#rLink').value='p:'+r.refId; }
+    const m=data.media.find(x=>x.src===r.src); if(m){ $('#rLink').value=m.id; }
+    if(r.kind==='video'){
+      const v=$('#rPreview'); v.src=r.src; v.style.display='block'; $('#rPreviewImg').style.display='none'; v.play();
+    } else {
+      const i=$('#rPreviewImg'); i.src=r.src; i.style.display='block'; $('#rPreview').style.display='none';
+    }
+    $('#rDelete').style.display='inline-flex'; $('#rCancel').style.display='inline-flex';
+    adminPanel.classList.add('open'); document.body.classList.add('admin-open');
+  }
+  $('#rDelete').onclick=()=>{
+    if(!currentReelId) return;
+    if(!confirm('Delete this reel?')) return;
+    data.reels=data.reels.filter(r=>r.id!==currentReelId);
+    save(); currentReelId=null; clearReelForm(); renderAll(); updateReelCount();
+  };
+  $('#rCancel').onclick=()=>{ currentReelId=null; clearReelForm(); };
+  function clearReelForm(){
+    $('#rTitle').value=''; $('#rDesc').value='';
+    $('#rSourceType').value='video'; refreshReelSelects(); $('#rLink').value='';
+    $('#rUpload').value=''; $('#rPreview').style.display='none'; $('#rPreviewImg').style.display='none';
+    $('#rDelete').style.display='none'; $('#rCancel').style.display='none';
+    uploadedVideoURL=''; selectedImageURL='';
+  }
+  function updateReelCount(){ $('#reelCount').textContent=data.reels.length; }
+  $('#rClear').onclick=()=>{ if(confirm('Remove all reels?')){ data.reels=[]; save(); renderAll(); updateReelCount(); } };
+
+  // ----- Media tab -----
+  async function addMediaFromFile(file, type){
+    const src=URL.createObjectURL(file);
+    data.media.unshift({id:id(), type, name:file.name, src});
+    save(); renderMedia(); refreshReelSelects();
+  }
+  $('#mUploadImg').addEventListener('change', e=>{ const f=e.target.files[0]; if(f) addMediaFromFile(f,'image'); });
+  $('#mUploadVid').addEventListener('change', e=>{ const f=e.target.files[0]; if(f) addMediaFromFile(f,'video'); });
+  function renderMedia(){
+    const grid=$('#mediaGrid');
+    grid.innerHTML=data.media.map(m=>`<div class="media-tile" data-mid="${m.id}">${ m.type==='image'
+      ?`<img src="${m.src}" alt="${m.name}">`
+      :`<video src="${m.src}" muted loop playsinline></video>`}
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:8px">
+        <span class="small">${m.name||m.id}</span>
+        <button class="icon-btn danger" onclick="deleteMedia('${m.id}')">Delete</button>
+      </div></div>`).join('');
+  }
+  function deleteMedia(idm){ data.media=data.media.filter(x=>x.id!==idm); save(); renderMedia(); refreshReelSelects(); }
+
+  // ---------- Navigation ----------
+  function show(page){
+    state.page=page;
+    ['home','products','about'].forEach(p=>{ document.getElementById('page-'+p).hidden=(p!==page); });
+    $$('#nav a').forEach(a=> a.classList.toggle('active', a.dataset.page===page));
+  }
+  window.addEventListener('hashchange', ()=>{
+    const p=(location.hash.replace('#','')||'home').toLowerCase();
+    show(['home','products','about'].includes(p)?p:'home');
+  });
+
+  // ---------- Hydrate & render ----------
+  function ensureImages(){ data.products.forEach(p=>{ if(!p.img) p.img=svgProduct(p.cat,p.name); }); }
+  function hydrate(){
+    // brand + hero + about
+    document.querySelector('.brand h1').textContent=data.brand;
+    $('#heroEyebrow').textContent=data.hero?.eyebrow||initial.hero.eyebrow;
+    $('#heroHeadline').textContent=data.hero?.headline||initial.hero.headline;
+    $('#heroSub').textContent=data.hero?.sub||initial.hero.sub;
+    $('#aboutText') && ($('#aboutText').textContent=data.about);
+    $('#missionText') && ($('#missionText').textContent=data.mission);
+    // admin inputs
+    $('#brandInput').value=data.brand; $('#aboutInput').value=data.about; $('#missionInput').value=data.mission;
+    $('#heroEyebrowInput').value=data.hero?.eyebrow||''; $('#heroHeadlineInput').value=data.hero?.headline||''; $('#heroSubInput').value=data.hero?.sub||'';
+    // collections thumbnails
+    $$('.colImg').forEach(img=>{ const cat=img.dataset.cat; img.src=svgProduct(cat, cat.charAt(0).toUpperCase()+cat.slice(1)); });
+    ensureImages(); renderAll(); renderMedia(); updateReelCount(); refreshReelSelects();
+  }
+  function renderAll(){ renderGrid('homeGrid'); renderGrid('productsGrid'); renderCart(); }
+
+  function openAdminTab(name){
+    adminPanel.classList.add('open'); document.body.classList.add('admin-open');
+    $$('.tab').forEach(x=> x.classList.toggle('active', x.dataset.tab===name));
+    $$('[data-tabpanel]').forEach(p=>{ p.hidden = p.getAttribute('data-tabpanel')!==name; });
+  }
+
+  // ---------- Init ----------
+  function init(){
+    hydrate();
+    if(!location.hash) location.hash='#home';
+    show((location.hash||'#home').replace('#',''));
+    $('#openCart').onclick=()=>openDrawer(true);
+  }
+  init();
+
+  // ---------- Utils ----------
+  function id(){ return Math.random().toString(36).slice(2,9) }
+  function fileToDataURL(file){ return new Promise(res=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.readAsDataURL(file); }); }
+
+  // ---------- Export / Import ----------
+  $('#importFile').addEventListener('change', async e=>{
+    const f=e.target.files[0]; if(!f) return;
+    const text=await f.text();
+    try{
+      const incoming=JSON.parse(text);
+      data={...initial, ...incoming};
+      if(!data.cart) data.cart=[];
+      if(!data.media) data.media=[];
+      if(!data.reels) data.reels=[];
+      if(!data.hero) data.hero=initial.hero;
+      save(); hydrate(); alert('Imported');
+    }catch{ alert('Could not read JSON'); }
+  });
+  $('#exportBtn').onclick=()=>{
+    const out={...data};
+    const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='african-treasure-data.json'; a.click();
+  };
+  </script>
+</body>
+</html>
