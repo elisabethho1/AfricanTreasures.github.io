@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,25 +11,26 @@
     :root{
       /* Trufacebygrace-inspired palette: airy neutrals, deep ink, warm brass accent */
       --paper:#faf8f4; --ink:#131313; --muted:#6f6b67; --line:#e9e4db; --brass:#caa260; --brass-2:#e7d4a5;
-      --chip:#f2eee7; --chip-text:#3a362f; --danger:#b74a3f;
+      --chip:#f2eee7; --chip-text:#3a362f; --danger:#b74a3f; --ok:#2d7a46;
       --radius:18px; --shadow:0 22px 60px rgba(0,0,0,.14);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:var(--paper)}
 
-    /* Top nav: ultra-clean */
+    /* Top nav: ultra-clean (TFBG vibes) */
     .top{position:sticky; top:0; z-index:40; background:rgba(250,248,244,.8); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
     .wrap{max-width:1280px; margin:auto; padding:16px 22px; display:flex; align-items:center; gap:14px}
     .brand{display:flex; align-items:baseline; gap:12px}
     .badge{width:26px; height:26px; border-radius:50%; background:conic-gradient(from 130deg, var(--brass), var(--brass-2), var(--brass)); box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
     h1{font-family:"Playfair Display",serif; font-weight:600; font-size:26px; letter-spacing:.2px; margin:0}
-    .nav{margin-left:auto; display:flex; align-items:center; gap:14px}
-    .nav a{color:var(--ink); text-decoration:none; font-weight:600; padding:8px 12px; border-radius:999px}
+    .nav{margin-left:auto; display:flex; align-items:center; gap:8px}
+    .nav a{color:var(--ink); text-decoration:none; font-weight:600; padding:10px 14px; border-radius:999px; letter-spacing:.02em}
+    .nav a:hover{background:var(--chip); color:var(--chip-text)}
     .nav a.active{background:var(--chip); color:var(--chip-text)}
     .icon-btn{border:1px solid var(--line); background:#fff; border-radius:999px; padding:8px 12px; cursor:pointer}
 
-    /* Hero: editorial split with portrait image (generated) */
+    /* Hero */
     .hero{max-width:1280px; margin:36px auto 14px; padding:0 22px; display:grid; grid-template-columns:1.05fr .95fr; gap:26px}
     .hero-copy{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:26px 28px 30px; box-shadow:0 16px 46px rgba(0,0,0,.06)}
     .eyebrow{letter-spacing:.16em; text-transform:uppercase; font-size:12px; color:#7b776f}
@@ -39,7 +41,7 @@
     .btn.primary{background:linear-gradient(180deg,#fff,#f6efe3); border-color:#e3d7c3}
 
     .hero-visual{position:relative; border-radius:var(--radius); overflow:hidden; background:#eee; border:1px solid var(--line); box-shadow:var(--shadow)}
-    .hero-visual canvas{display:block; width:100%; height:100%}
+    .hero-visual canvas, .hero-visual video, .hero-visual img{display:block; width:100%; height:100%; object-fit:cover}
     .tag-chip{position:absolute; left:14px; top:14px; background:rgba(255,255,255,.9); backdrop-filter:blur(6px); border:1px solid var(--line); border-radius:999px; padding:6px 10px; font-size:12px}
 
     /* Collections row */
@@ -47,7 +49,7 @@
     .collection{position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); background:#fff; min-height:180px}
     .collection .label{position:absolute; left:14px; bottom:12px; background:rgba(255,255,255,.92); border:1px solid var(--line); border-radius:10px; padding:6px 10px; font-weight:600}
 
-    /* Product grid: large cards, generous whitespace */
+    /* Product grid */
     .section{max-width:1280px; margin:18px auto 60px; padding:0 22px}
     .section h2{font-family:"Playfair Display",serif; font-size:28px; margin:24px 0 10px}
     .grid{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:18px}
@@ -64,11 +66,11 @@
     .edit-btn{display:none}
     body.admin-open .edit-btn{display:inline-flex}
 
-    /* Interleaved full-bleed reel */
+    /* Reel blocks */
     .reel{grid-column:1/-1; display:grid; grid-template-columns:1fr .9fr; gap:18px; align-items:stretch}
     .reel .copy{background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px 18px 20px}
     .reel h3{font-family:"Playfair Display",serif; font-size:32px; margin:6px 0}
-    .reel video, .reel canvas{width:100%; height:100%; display:block; border:1px solid var(--line); border-radius:16px; background:#0e0f10; object-fit:cover}
+    .reel video, .reel canvas, .reel img{width:100%; height:100%; display:block; border:1px solid var(--line); border-radius:16px; background:#0e0f10; object-fit:cover}
 
     /* About */
     .about{display:grid; grid-template-columns:1.1fr .9fr; gap:16px}
@@ -81,16 +83,25 @@
     .cart-row{display:grid; grid-template-columns: 64px 1fr auto; gap:10px; align-items:center; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:8px}
     .cart-row img{width:64px; height:64px; object-fit:cover; border-radius:10px}
 
-    /* Admin (refined) */
-    .admin{position:fixed; inset:auto 22px 22px auto; width:500px; max-width:96vw; background:#fff; color:#111; border-radius:18px; box-shadow:var(--shadow); border:1px solid var(--line); display:none; z-index:60}
+    /* Admin (TFBG-style: soft cards + tabs) */
+    .admin{position:fixed; inset:auto 22px 22px auto; width:560px; max-width:96vw; background:#fff; color:#111; border-radius:18px; box-shadow:var(--shadow); border:1px solid var(--line); display:none; z-index:60}
     .admin.open{display:block}
     .admin header{display:flex; align-items:center; justify-content:space-between; gap:8px; padding:12px 14px; border-bottom:1px solid var(--line); border-top-left-radius:18px; border-top-right-radius:18px}
+    .admin .tabs{display:flex; gap:6px}
+    .tab{padding:8px 12px; border:1px solid var(--line); background:#fff; border-radius:999px; cursor:pointer}
+    .tab.active{background:var(--chip)}
     .admin .content{padding:14px 16px; display:grid; gap:14px}
     .section-box{border:1px dashed var(--line); border-radius:12px; padding:12px}
-    .row input,.row select,.row textarea{padding:10px 12px; border:1px solid var(--line); border-radius:10px; font-family:inherit; background:#fff; color:#111}
+    .row input,.row select,.row textarea{width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; font-family:inherit; background:#fff; color:#111}
     .actions{display:flex; gap:8px; flex-wrap:wrap}
     #pPreview{width:100%; height:auto; border-radius:10px; border:1px solid var(--line); display:none}
     #reelPreview{width:100%; aspect-ratio:16/9; border-radius:12px; border:1px solid var(--line); display:none}
+    .media-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
+    .media-tile{border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#fff}
+    .media-tile img,.media-tile video{width:100%; height:120px; object-fit:cover; display:block}
+    .pill{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:12px; background:#fff}
+    .danger{color:#fff; background:var(--danger); border-color:transparent}
+    .ok{color:#fff; background:var(--ok); border-color:transparent}
   </style>
 </head>
 <body>
@@ -111,9 +122,9 @@
   <!-- Hero -->
   <section class="hero">
     <article class="hero-copy">
-      <div class="eyebrow">Handcrafted in Kenya</div>
-      <div class="headline">Brass. Bold. Maasai.</div>
-      <p class="sub">Authentic jewelry by Maasai women. Every purchase supports a family of seven children and strengthens local communities through fair trade.</p>
+      <div class="eyebrow" id="heroEyebrow">Handcrafted in Kenya</div>
+      <div class="headline" id="heroHeadline">Brass. Bold. Maasai.</div>
+      <p class="sub" id="heroSub">Authentic jewelry by Maasai women. Every purchase supports a family of seven children and strengthens local communities through fair trade.</p>
       <div class="cta">
         <a class="btn primary" href="#products">Shop collection</a>
         <a class="btn" href="#about">Our story</a>
@@ -183,18 +194,39 @@
   <div class="admin" id="adminPanel" aria-live="polite">
     <header>
       <strong>Store Admin</strong>
-      <div style="display:flex; gap:8px">
-        <button class="btn" id="exportBtn">Export JSON</button>
-        <label class="btn" for="importFile" style="cursor:pointer">Import JSON</label>
+      <div style="display:flex; gap:8px; align-items:center">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="site" role="tab" aria-selected="true">Site</button>
+          <button class="tab" data-tab="products" role="tab">Products</button>
+          <button class="tab" data-tab="reels" role="tab">Reels</button>
+          <button class="tab" data-tab="media" role="tab">Media</button>
+        </div>
+        <button class="icon-btn" id="exportBtn" title="Export JSON" aria-label="Export data">⬇︎ Export</button>
+        <label class="icon-btn" for="importFile" style="cursor:pointer" title="Import JSON">⬆︎ Import</label>
         <input id="importFile" type="file" accept="application/json" hidden>
       </div>
     </header>
-    <div class="content">
+
+    <!-- Tab: Site (brand + hero + about) -->
+    <div class="content" data-tabpanel="site">
       <div class="section-box">
         <div class="row"><label>Store name</label><input id="brandInput" placeholder="The African Treasure Store"></div>
+      </div>
+      <div class="section-box">
+        <div class="row"><strong>Hero editor</strong></div>
+        <div class="row"><label>Eyebrow</label><input id="heroEyebrowInput" placeholder="Handcrafted in Kenya"></div>
+        <div class="row"><label>Headline</label><input id="heroHeadlineInput" placeholder="Brass. Bold. Maasai."></div>
+        <div class="row"><label>Sub copy</label><textarea id="heroSubInput" rows="3" placeholder="Authentic jewelry by Maasai women…"></textarea></div>
+        <div class="actions"><button class="btn ok" id="saveHero">Save hero</button></div>
+      </div>
+      <div class="section-box">
         <div class="row"><label>About</label><textarea id="aboutInput" rows="3"></textarea></div>
         <div class="row"><label>Mission</label><textarea id="missionInput" rows="3"></textarea></div>
       </div>
+    </div>
+
+    <!-- Tab: Products (existing editor) -->
+    <div class="content" data-tabpanel="products" hidden>
       <div class="section-box">
         <div class="row"><strong>Product editor</strong></div>
         <div class="row"><input id="pName" placeholder="Name (e.g., Nairobi Hoop)"></div>
@@ -215,10 +247,54 @@
           <button class="btn" id="genReel">Generate short video</button>
           <button class="btn" id="addProduct">Add</button>
           <button class="btn" id="cancelEdit" style="display:none">Cancel edit</button>
-          <button class="btn" id="deleteProduct" style="display:none">Delete</button>
+          <button class="btn danger" id="deleteProduct" style="display:none">Delete</button>
         </div>
         <video id="reelPreview" controls muted loop></video>
         <div class="row"><button class="btn" id="clearProducts" style="border-color:#f0e2d0">Remove ALL products</button></div>
+      </div>
+    </div>
+
+    <!-- Tab: Reels (NEW) -->
+    <div class="content" data-tabpanel="reels" hidden>
+      <div class="section-box">
+        <div class="row"><strong>Short reels</strong><span class="small" style="margin-left:auto">Add, edit, remove, or attach media</span></div>
+        <div class="row"><input id="rTitle" placeholder="Title (e.g., Nairobi Hoop)"></div>
+        <div class="row"><textarea id="rDesc" rows="2" placeholder="Short description"></textarea></div>
+        <div class="row" style="display:grid; grid-template-columns:1fr 1fr; gap:8px">
+          <select id="rSourceType">
+            <option value="auto">Auto (from product)</option>
+            <option value="media">From media library</option>
+            <option value="product">Specific product</option>
+            <option value="upload">Upload video</option>
+          </select>
+          <select id="rLink" title="Product or media link"><option value="">— select —</option></select>
+        </div>
+        <div class="row"><input id="rUpload" type="file" accept="video/*" hidden></div>
+        <div class="actions">
+          <button class="btn" id="rGenFromProduct">Generate from selected product</button>
+          <button class="btn ok" id="rAdd">Add reel</button>
+          <button class="btn" id="rCancel" style="display:none">Cancel edit</button>
+          <button class="btn danger" id="rDelete" style="display:none">Delete</button>
+        </div>
+        <video id="rPreview" controls muted loop style="width:100%; aspect-ratio:16/9; border:1px solid var(--line); border-radius:12px; display:none"></video>
+        <div class="row" style="margin-top:6px">
+          <span class="pill">Reel count: <span id="reelCount">0</span></span>
+          <button class="pill" id="rClear" style="margin-left:auto">Remove ALL reels</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Media (NEW) -->
+    <div class="content" data-tabpanel="media" hidden>
+      <div class="section-box">
+        <div class="row"><strong>Media library</strong><span class="small" style="margin-left:auto">Images & videos</span></div>
+        <div class="actions">
+          <label class="btn" for="mUploadImg" style="cursor:pointer">Upload image</label>
+          <input id="mUploadImg" type="file" accept="image/*" hidden>
+          <label class="btn" for="mUploadVid" style="cursor:pointer">Upload video</label>
+          <input id="mUploadVid" type="file" accept="video/*" hidden>
+        </div>
+        <div class="media-grid" id="mediaGrid"></div>
       </div>
     </div>
   </div>
@@ -226,27 +302,65 @@
   <script>
   // ---------- Config ----------
   const CURRENCY='€';
-  const KEY='ats_store_en_v5';
-  const initial={ brand:'The African Treasure Store', about:'We empower Maasai women and create real social impact through ethical trade.', mission:'Offer a unique, sustainable collection of Maasai jewelry with a strong focus on ethical trade. Proceeds support a family of seven children.', products:[ {id:'ear1',name:'Nairobi Hoop',cat:'earrings',price:39,img:'',desc:'Brass hoops with vibrant beads.'}, {id:'ear2',name:'Samburu Drop',cat:'earrings',price:45,img:'',desc:'Elegant drops — light & comfy.'}, {id:'nec1',name:'Maasai Layers',cat:'necklaces',price:79,img:'',desc:'Statement layered necklace.'}, {id:'nec2',name:'Savanna Chic',cat:'necklaces',price:69,img:'',desc:'Minimal piece with subtle beads.'}, {id:'ban1',name:'Serengeti Bangle',cat:'bangles',price:49,img:'',desc:'Stackable bangle in solid brass.'}, {id:'ban2',name:'Sunset Wave',cat:'bangles',price:54,img:'',desc:'Wavy profile, polished shine.'}, {id:'rin1',name:'Eldoret Ring',cat:'rings',price:29,img:'',desc:'Adjustable, hand-hammered ring.'}, {id:'rin2',name:'Kilimanjaro Crest',cat:'rings',price:34,img:'',desc:'Bold crest — culture meets chic.'} ], cart:[] };
+  const KEY='ats_store_en_v6'; // bump for reels/media; migrate from v5 if found
+  const oldKEY='ats_store_en_v5';
+  const initial={
+    brand:'The African Treasure Store',
+    about:'We empower Maasai women and create real social impact through ethical trade.',
+    mission:'Offer a unique, sustainable collection of Maasai jewelry with a strong focus on ethical trade. Proceeds support a family of seven children.',
+    hero:{ eyebrow:'Handcrafted in Kenya', headline:'Brass. Bold. Maasai.', sub:'Authentic jewelry by Maasai women. Every purchase supports a family of seven children and strengthens local communities through fair trade.' },
+    products:[
+      {id:'ear1',name:'Nairobi Hoop',cat:'earrings',price:39,img:'',desc:'Brass hoops with vibrant beads.'},
+      {id:'ear2',name:'Samburu Drop',cat:'earrings',price:45,img:'',desc:'Elegant drops — light & comfy.'},
+      {id:'nec1',name:'Maasai Layers',cat:'necklaces',price:79,img:'',desc:'Statement layered necklace.'},
+      {id:'nec2',name:'Savanna Chic',cat:'necklaces',price:69,img:'',desc:'Minimal piece with subtle beads.'},
+      {id:'ban1',name:'Serengeti Bangle',cat:'bangles',price:49,img:'',desc:'Stackable bangle in solid brass.'},
+      {id:'ban2',name:'Sunset Wave',cat:'bangles',price:54,img:'',desc:'Wavy profile, polished shine.'},
+      {id:'rin1',name:'Eldoret Ring',cat:'rings',price:29,img:'',desc:'Adjustable, hand-hammered ring.'},
+      {id:'rin2',name:'Kilimanjaro Crest',cat:'rings',price:34,img:'',desc:'Bold crest — culture meets chic.'}
+    ],
+    reels:[ /* {id, title, desc, mode:'auto'|'product'|'media'|'upload', refId?, mediaId?, video? (blobURL)} */ ],
+    media:[ /* {id, type:'image'|'video', name, src} */ ],
+    cart:[]
+  };
   let data=load(); const state={page:'home'}; let currentEditId=null, newImageDataURL='';
+  let currentReelId=null; let uploadVideoURL='';
 
   const $=s=>document.querySelector(s); const $$=s=>Array.from(document.querySelectorAll(s));
-  function load(){ try{return JSON.parse(localStorage.getItem(KEY))||initial}catch(_){return initial} }
+  function load(){
+    // migrate v5 if present
+    try{
+      const v6=JSON.parse(localStorage.getItem(KEY));
+      if(v6) return v6;
+      const v5=JSON.parse(localStorage.getItem(oldKEY));
+      if(v5){
+        const hydrated={...initial, ...v5};
+        if(!hydrated.hero) hydrated.hero={ eyebrow:'Handcrafted in Kenya', headline:'Brass. Bold. Maasai.', sub: $('#heroSub')?.textContent || initial.hero.sub };
+        if(!hydrated.reels) hydrated.reels=[];
+        if(!hydrated.media) hydrated.media=[];
+        localStorage.setItem(KEY, JSON.stringify(hydrated));
+        return hydrated;
+      }
+      return initial;
+    }catch(_){return initial}
+  }
   function save(){ localStorage.setItem(KEY, JSON.stringify(data)); }
   function money(n){ return CURRENCY+Number(n).toFixed(2).replace('.',','); }
 
-  // ---------- Themed realistic brass SVG generator ----------
-  function svgProduct(cat,title){ const brass=getComputedStyle(document.documentElement).getPropertyValue('--brass').trim()||'#caa260'; const brass2=getComputedStyle(document.documentElement).getPropertyValue('--brass-2').trim()||'#e7d4a5'; const paper=getComputedStyle(document.documentElement).getPropertyValue('--paper').trim()||'#faf8f4'; const ink=getComputedStyle(document.documentElement).getPropertyValue('--ink').trim()||'#131313'; const w=800,h=1000; const defs=`<defs><linearGradient id='gB' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='${brass}'/><stop offset='1' stop-color='${brass2}'/></linearGradient><radialGradient id='glow' cx='50%' cy='35%' r='65%'><stop offset='0%' stop-color='rgba(255,255,255,.55)'/><stop offset='100%' stop-color='rgba(255,255,255,0)'/></radialGradient><filter id='soft'><feGaussianBlur stdDeviation='2'/></filter></defs>`; let fg=''; if(cat==='earrings'){ fg=`<g><circle cx='280' cy='540' r='170' stroke='url(#gB)' stroke-width='26' fill='none'/><circle cx='520' cy='540' r='120' stroke='url(#gB)' stroke-width='22' fill='none'/><circle cx='520' cy='700' r='14' fill='${ink}'/></g>`; } else if(cat==='necklaces'){ fg=`<g><path d='M140 380 q260 220 520 0' stroke='url(#gB)' stroke-width='28' fill='none' stroke-linecap='round'/><path d='M170 440 q230 200 460 0' stroke='${ink}' stroke-width='10' fill='none' stroke-linecap='round'/><circle cx='400' cy='590' r='22' fill='url(#gB)'/></g>`; } else if(cat==='bangles'){ fg=`<g><ellipse cx='410' cy='620' rx='240' ry='80' fill='none' stroke='url(#gB)' stroke-width='24'/><ellipse cx='410' cy='700' rx='220' ry='72' fill='none' stroke='${ink}' stroke-width='16'/><ellipse cx='410' cy='780' rx='200' ry='66' fill='none' stroke='url(#gB)' stroke-width='18'/></g>`; } else { fg=`<g><circle cx='420' cy='640' r='140' stroke='url(#gB)' stroke-width='30' fill='none'/><circle cx='420' cy='640' r='52' fill='${paper}'/><circle cx='420' cy='500' r='24' fill='${ink}'/></g>`; } const svg=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}'><rect width='100%' height='100%' fill='#efe9de'/><ellipse cx='400' cy='520' rx='360' ry='380' fill='url(#glow)' opacity='.35'/>${defs}${fg}<text x='60' y='120' font-family='Playfair Display, serif' font-size='46' fill='${ink}' font-weight='700'>${title}</text></svg>`; return 'data:image/svg+xml;utf8,'+encodeURIComponent(svg); }
+  // ---------- Themed product SVG ----------
+  function svgProduct(cat,title){ const brass=getComputedStyle(document.documentElement).getPropertyValue('--brass').trim()||'#caa260'; const brass2=getComputedStyle(document.documentElement).getPropertyValue('--brass-2').trim()||'#e7d4a5'; const paper=getComputedStyle(document.documentElement).getPropertyValue('--paper').trim()||'#faf8f4'; const ink=getComputedStyle(document.documentElement).getPropertyValue('--ink').trim()||'#131313'; const w=800,h=1000; const defs=`<defs><linearGradient id='gB' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='${brass}'/><stop offset='1' stop-color='${brass2}'/></linearGradient><radialGradient id='glow' cx='50%' cy='35%' r='65%'><stop offset='0%' stop-color='rgba(255,255,255,.55)'/><stop offset='100%' stop-color='rgba(255,255,255,0)'/></radialGradient></defs>`; let fg=''; if(cat==='earrings'){ fg=`<g><circle cx='280' cy='540' r='170' stroke='url(#gB)' stroke-width='26' fill='none'/><circle cx='520' cy='540' r='120' stroke='url(#gB)' stroke-width='22' fill='none'/><circle cx='520' cy='700' r='14' fill='${ink}'/></g>`; } else if(cat==='necklaces'){ fg=`<g><path d='M140 380 q260 220 520 0' stroke='url(#gB)' stroke-width='28' fill='none' stroke-linecap='round'/><path d='M170 440 q230 200 460 0' stroke='${ink}' stroke-width='10' fill='none' stroke-linecap='round'/><circle cx='400' cy='590' r='22' fill='url(#gB)'/></g>`; } else if(cat==='bangles'){ fg=`<g><ellipse cx='410' cy='620' rx='240' ry='80' fill='none' stroke='url(#gB)' stroke-width='24'/><ellipse cx='410' cy='700' rx='220' ry='72' fill='none' stroke='${ink}' stroke-width='16'/><ellipse cx='410' cy='780' rx='200' ry='66' fill='none' stroke='url(#gB)' stroke-width='18'/></g>`; } else { fg=`<g><circle cx='420' cy='640' r='140' stroke='url(#gB)' stroke-width='30' fill='none'/><circle cx='420' cy='640' r='52' fill='${paper}'/><circle cx='420' cy='500' r='24' fill='${ink}'/></g>`; } const svg=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}'><rect width='100%' height='100%' fill='#efe9de'/><ellipse cx='400' cy='520' rx='360' ry='380' fill='url(#glow)' opacity='.35'/>${defs}${fg}<text x='60' y='120' font-family='Playfair Display, serif' font-size='46' fill='${ink}' font-weight='700'>${title}</text></svg>`; return 'data:image/svg+xml;utf8,'+encodeURIComponent(svg); }
 
-  // ---------- AI Reel (Canvas → WebM) ----------
-  async function makeReelFromProduct(p){ const canvas=document.createElement('canvas'); canvas.width=1280; canvas.height=720; const ctx=canvas.getContext('2d'); const img=new Image(); img.src=p.img||svgProduct(p.cat,p.name); await img.decode().catch(()=>{}); let t0; function frame(ts){ if(!t0) t0=ts; const t=(ts-t0)/1000; const g=ctx.createLinearGradient(0,0,1280,720); g.addColorStop(0,'#161515'); g.addColorStop(1,'#2b2823'); ctx.fillStyle=g; ctx.fillRect(0,0,1280,720); const ar=(img.width||800)/(img.height||1000); let w=540*(1+0.05*Math.sin(t*.8)), h=w/ar; if(h<540){ h=540; w=h*ar; } const x=720-w/2 + 30*Math.sin(t*.6), y=360-h/2; ctx.drawImage(img,x,y,w,h); ctx.fillStyle='rgba(0,0,0,.35)'; ctx.fillRect(40,560,1200,100); ctx.fillStyle='#f7f6f4'; ctx.font='700 40px "Playfair Display"'; ctx.fillText(p.name, 60, 625); ctx.font='500 18px Inter'; ctx.fillText((p.desc||'')+`  •  ${money(p.price)}`, 60, 655); } const stream=canvas.captureStream(30); const rec=new MediaRecorder(stream,{mimeType:'video/webm;codecs=vp9'}); const chunks=[]; rec.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); }; rec.start(); let raf; function loop(ts){ frame(ts); raf=requestAnimationFrame(loop); } raf=requestAnimationFrame(loop); await new Promise(r=>setTimeout(r,5000)); rec.stop(); cancelAnimationFrame(raf); await new Promise(r=>rec.onstop=r); return new Blob(chunks,{type:'video/webm'}); }
+  // ---------- Canvas → WebM reel ----------
+  async function makeReelFromProduct(p){ const canvas=document.createElement('canvas'); canvas.width=1280; canvas.height=720; const ctx=canvas.getContext('2d'); const img=new Image(); img.src=p.img||svgProduct(p.cat,p.name); await img.decode().catch(()=>{}); let t0; function frame(ts){ if(!t0) t0=ts; const t=(ts-t0)/1000; const g=ctx.createLinearGradient(0,0,1280,720); g.addColorStop(0,'#161515'); g.addColorStop(1,'#2b2823'); ctx.fillStyle=g; ctx.fillRect(0,0,1280,720); const ar=(img.width||800)/(img.height||1000); let w=540*(1+0.05*Math.sin(t*.8)), h=w/ar; if(h<540){ h=540; w=h*ar;} const x=720-w/2 + 30*Math.sin(t*.6), y=360-h/2; ctx.drawImage(img,x,y,w,h); ctx.fillStyle='rgba(0,0,0,.35)'; ctx.fillRect(40,560,1200,100); ctx.fillStyle='#f7f6f4'; ctx.font='700 40px "Playfair Display"'; ctx.fillText(p.name, 60, 625); ctx.font='500 18px Inter'; ctx.fillText((p.desc||'')+`  •  ${money(p.price)}`, 60, 655);} const stream=canvas.captureStream(30); const type=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?'video/webm;codecs=vp9':'video/webm'; const rec=new MediaRecorder(stream,{mimeType:type}); const chunks=[]; rec.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); }; rec.start(); let raf; function loop(ts){ frame(ts); raf=requestAnimationFrame(loop); } raf=requestAnimationFrame(loop); await new Promise(r=>setTimeout(r,4000)); rec.stop(); cancelAnimationFrame(raf); await new Promise(r=>rec.onstop=r); return new Blob(chunks,{type:'video/webm'}); }
 
   // ---------- Render helpers ----------
-  function cardHTML(p){ return `<article class="card"><div class="imgwrap">${p.img?`<img alt="${p.name}" src="${p.img}">`:`<div class='small' style='padding:20px'>(add image)</div>`}</div><div class="info"><div class="row"><div><strong>${p.name}</strong><div class="small">${label(p.cat)}</div></div><div class="price">${money(p.price)}</div></div><p class="small">${p.desc||''}</p><div style="display:flex; gap:8px; margin-top:6px"><button class="btn edit-btn" onclick="editProduct('${p.id}')">Edit</button><button class="btn" onclick="quickView('${p.id}')">Details</button><button class="btn primary" onclick="addToCart('${p.id}')">Add to cart</button></div></div></article>`; }
-  function reelHTML(p){ return `<div class="reel" data-reel-for="${p?.id||''}"><div class="copy"><div class="eyebrow">Short reel</div><h3>${p?.name||'Our Craft'}</h3><p class="small">${p?.desc||'Handcrafted brass with cultural detail.'}</p><button class="btn" onclick="playReel(this)">Play video</button></div><canvas></canvas></div>`; }
   function label(cat){ return ({earrings:'Earrings',necklaces:'Necklaces',bangles:'Bangles',rings:'Rings'})[cat]||cat; }
+  function cardHTML(p){ return `<article class="card"><div class="imgwrap">${p.img?`<img alt="${p.name}" src="${p.img}">`:`<div class='small' style='padding:20px'>(add image)</div>`}</div><div class="info"><div class="row"><div><strong>${p.name}</strong><div class="small">${label(p.cat)}</div></div><div class="price">${money(p.price)}</div></div><p class="small">${p.desc||''}</p><div style="display:flex; gap:8px; margin-top:6px"><button class="btn edit-btn" onclick="editProduct('${p.id}')">Edit</button><button class="btn" onclick="quickView('${p.id}')">Details</button><button class="btn primary" onclick="addToCart('${p.id}')">Add to cart</button></div></div></article>`; }
+  function reelBlockHTML(r, fallbackProduct){ const title=r.title||fallbackProduct?.name||'Our Craft'; const desc=r.desc||fallbackProduct?.desc||'Handcrafted brass with cultural detail.'; const mediaThumb = r.mode==='media' ? getMediaById(r.mediaId)?.src : '';
+    return `<div class="reel" data-reel-id="${r.id}"><div class="copy"><div class="eyebrow">Short reel</div><h3>${title}</h3><p class="small">${desc}</p><div style="display:flex; gap:8px; margin-top:8px"><button class="btn" onclick="playReelBlock(this)">Play video</button><button class="btn edit-btn" onclick="editReel('${r.id}')">Edit</button></div></div>${ mediaThumb?`<img src="${mediaThumb}" alt="${title}">`:`<canvas></canvas>`}</div>`; }
 
-  function renderGrid(where){ const grid=document.getElementById(where); const products=data.products.slice(); const blocks=[]; for(let i=0;i<products.length;i++){ blocks.push(products[i]); if((i+1)%4===0){ blocks.push({__reel:true,pick:products[Math.max(0,i-1)]}); } } grid.innerHTML=blocks.map(b=> b.__reel?reelHTML(b.pick):cardHTML(b)).join(''); }
+  function renderGrid(where){ const grid=document.getElementById(where); const products=data.products.slice(); const blocks=[]; const reels=data.reels.length?data.reels.slice():[]; let reelIndex=0; for(let i=0;i<products.length;i++){ blocks.push(products[i]); if((i+1)%4===0 && reels.length){ blocks.push({__reel:true, reel: reels[reelIndex%reels.length], pick: products[Math.max(0,i-1)]}); reelIndex++; } }
+    grid.innerHTML=blocks.map(b=> b.__reel?reelBlockHTML(b.reel, b.pick):cardHTML(b)).join(''); }
 
   // ---------- Cart ----------
   function addToCart(id){ const it=data.cart.find(i=>i.id===id); if(it) it.qty++; else data.cart.push({id,qty:1}); save(); renderCart(); openDrawer(true); }
@@ -260,12 +374,21 @@
   $('#checkoutBtn').onclick=()=>{ const dlg=$('#checkoutDialog'); dlg.innerHTML=$('#checkoutForm').outerHTML; dlg.showModal(); };
   $('#checkoutDialog').addEventListener('close', function(){ if(this.returnValue==='confirm'){ const form=this.querySelector('form'); const d=Object.fromEntries(new FormData(form).entries()); const summary=data.cart.map(i=>{ const p=data.products.find(x=>x.id===i.id); return `${i.qty}× ${p?.name}`;}).join(', '); alert(`Thanks ${d.name}!\n\nYour order: ${summary}\nWe will email ${d.email} with payment & shipping details.`); data.cart=[]; save(); renderCart(); openDrawer(false); }});
 
-  // ---------- Admin ----------
+  // ---------- Admin shell ----------
   const adminPanel=$('#adminPanel'); $('#adminToggle').onclick=()=>{ adminPanel.classList.toggle('open'); document.body.classList.toggle('admin-open',adminPanel.classList.contains('open')); };
+  // tabs
+  $$('.tab').forEach(t=> t.addEventListener('click',()=>{ const name=t.dataset.tab; $$('.tab').forEach(x=>x.classList.toggle('active', x===t)); $$('[data-tabpanel]').forEach(p=>{ p.hidden = p.getAttribute('data-tabpanel')!==name; }); }));
+
+  // ----- Site tab bindings -----
   $('#brandInput').addEventListener('input', e=>{ data.brand=e.target.value; document.querySelector('.brand h1').textContent=data.brand; save(); });
   $('#aboutInput').addEventListener('input', e=>{ data.about=e.target.value; $('#aboutText').textContent=data.about; save(); });
   $('#missionInput').addEventListener('input', e=>{ data.mission=e.target.value; $('#missionText').textContent=data.mission; save(); });
+  $('#heroEyebrowInput').addEventListener('input', e=>{ data.hero.eyebrow=e.target.value; $('#heroEyebrow').textContent=data.hero.eyebrow; save(); });
+  $('#heroHeadlineInput').addEventListener('input', e=>{ data.hero.headline=e.target.value; $('#heroHeadline').textContent=data.hero.headline; save(); });
+  $('#heroSubInput').addEventListener('input', e=>{ data.hero.sub=e.target.value; $('#heroSub').textContent=data.hero.sub; save(); });
+  $('#saveHero').onclick=()=>{ alert('Hero saved'); };
 
+  // ----- Products tab -----
   $('#pImg').addEventListener('change', async e=>{ const f=e.target.files[0]; if(!f) return; newImageDataURL=await fileToDataURL(f); showPreview(newImageDataURL); });
   $('#genNewImg').onclick=()=>{ const name=$('#pName').value||'New piece'; const cat=$('#pCat').value; newImageDataURL=svgProduct(cat,name); showPreview(newImageDataURL); };
   $('#genReel').onclick=async()=>{ const prod=await buildProductFromInputs(currentEditId,true); const blob=await makeReelFromProduct(prod); const url=URL.createObjectURL(blob); const v=$('#reelPreview'); v.src=url; v.style.display='block'; v.play(); };
@@ -277,37 +400,113 @@
   $('#deleteProduct').onclick=()=>{ if(!currentEditId) return; if(!confirm('Delete this product?')) return; data.products=data.products.filter(p=>p.id!==currentEditId); save(); exitEdit(); clearForm(); renderAll(); };
   $('#cancelEdit').onclick=()=>{ exitEdit(); clearForm(); };
 
-  function editProduct(id){ const p=data.products.find(x=>x.id===id); if(!p) return; currentEditId=id; adminPanel.classList.add('open'); document.body.classList.add('admin-open'); $('#pName').value=p.name; $('#pCat').value=p.cat; $('#pPrice').value=p.price; $('#pDesc').value=p.desc; newImageDataURL=p.img||''; if(newImageDataURL) showPreview(newImageDataURL); $('#addProduct').textContent='Save'; $('#cancelEdit').style.display='inline-flex'; $('#deleteProduct').style.display='inline-flex'; }
-  function exitEdit(){ currentEditId=null; $('#addProduct').textContent='Add'; $('#cancelEdit').style.display='none'; $('#deleteProduct').style.display='none'; $('#pPreview').style.display='none'; }
-
-  $('#clearProducts').onclick=()=>{ if(confirm('Remove all products?')){ data.products=[]; save(); renderAll(); }};
-  $('#importFile').addEventListener('change', async e=>{ const f=e.target.files[0]; if(!f) return; const text=await f.text(); try{ data=JSON.parse(text); if(!data.cart) data.cart=[]; save(); hydrate(); }catch{ alert('Could not read JSON'); } });
-  $('#exportBtn').onclick=()=>{ const out={...data}; const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='african-treasure-data.json'; a.click(); };
-
+  function editProduct(id){ const p=data.products.find(x=>x.id===id); if(!p) return; currentEditId=id; openAdminTab('products'); $('#pName').value=p.name; $('#pCat').value=p.cat; $('#pPrice').value=p.price; $('#pDesc').value=p.desc; newImageDataURL=p.img||''; if(newImageDataURL) showPreview(newImageDataURL); $('#addProduct').textContent='Save'; $('#cancelEdit').style.display='inline-flex'; $('#deleteProduct').style.display='inline-flex'; adminPanel.classList.add('open'); document.body.classList.add('admin-open'); }
+  function exitEdit(){ currentEditId=null; $('#addProduct').textContent='Add'; $('#cancelEdit').style.display='none'; $('#deleteProduct').style.display='none'; $('#pPreview').style.display='none'; $('#reelPreview').style.display='none'; }
   function clearForm(){ $('#pName').value=''; $('#pCat').value='earrings'; $('#pPrice').value=''; $('#pDesc').value=''; $('#pImg').value=''; newImageDataURL=''; $('#pPreview').style.display='none'; $('#reelPreview').style.display='none'; }
-  function id(){ return Math.random().toString(36).slice(2,9) }
-  function fileToDataURL(file){ return new Promise(res=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.readAsDataURL(file); }); }
+  $('#clearProducts').onclick=()=>{ if(confirm('Remove all products?')){ data.products=[]; save(); renderAll(); }};
+
+  // ----- Reels tab (NEW) -----
+  function refreshReelSelects(){
+    const sel=$('#rLink'); sel.innerHTML='<option value="">— select —</option>';
+    const type=$('#rSourceType').value;
+    if(type==='product' || type==='auto'){
+      data.products.forEach(p=> sel.insertAdjacentHTML('beforeend', `<option value="p:${p.id}">🧿 ${p.name}</option>`));
+    } else if(type==='media'){
+      data.media.filter(m=>m.type==='video'||m.type==='image').forEach(m=> sel.insertAdjacentHTML('beforeend', `<option value="m:${m.id}">${m.type==='video'?'🎞️':'🖼️'} ${m.name||m.id}</option>`));
+    } else if(type==='upload'){
+      sel.innerHTML='<option value="">Use file picker…</option>';
+    }
+  }
+  $('#rSourceType').addEventListener('change',()=>{ refreshReelSelects(); if($('#rSourceType').value==='upload'){ $('#rUpload').hidden=false; } else { $('#rUpload').hidden=true; } });
+  $('#rGenFromProduct').onclick=async()=>{
+    const link=$('#rLink').value; if(!link || !link.startsWith('p:')){ alert('Select a product first'); return; }
+    const pid=link.slice(2); const p=data.products.find(x=>x.id===pid); if(!p) return; const blob=await makeReelFromProduct(p); const url=URL.createObjectURL(blob); previewReel(url);
+  };
+  function previewReel(url){ const v=$('#rPreview'); v.src=url; v.style.display='block'; v.play(); uploadVideoURL=url; }
+  $('#rUpload').addEventListener('change', async e=>{ const f=e.target.files[0]; if(!f) return; const url=URL.createObjectURL(f); previewReel(url); });
+  function getMediaById(id){ return data.media.find(m=>m.id===id); }
+
+  $('#rAdd').onclick=()=>{ const title=$('#rTitle').value.trim()||'Our Craft'; const desc=$('#rDesc').value.trim(); const mode=$('#rSourceType').value; const link=$('#rLink').value; const r={ id:id(), title, desc, mode };
+    if(mode==='product' && link.startsWith('p:')){ r.refId=link.slice(2); }
+    if(mode==='media' && link.startsWith('m:')){ r.mediaId=link.slice(2); }
+    if(mode==='upload' && uploadVideoURL){ r.video=uploadVideoURL; }
+    data.reels.unshift(r); save(); uploadVideoURL=''; renderAll(); updateReelCount(); clearReelForm(); alert('Reel added'); };
+
+  function editReel(rid){ const r=data.reels.find(x=>x.id===rid); if(!r) return; currentReelId=rid; openAdminTab('reels'); $('#rTitle').value=r.title||''; $('#rDesc').value=r.desc||''; $('#rSourceType').value=r.mode||'auto'; refreshReelSelects(); if(r.mode==='product'&&r.refId){ $('#rLink').value='p:'+r.refId; }
+    if(r.mode==='media'&&r.mediaId){ $('#rLink').value='m:'+r.mediaId; const m=getMediaById(r.mediaId); if(m && m.type==='video'){ previewReel(m.src); } }
+    if(r.mode==='upload'&&r.video){ previewReel(r.video); }
+    $('#rDelete').style.display='inline-flex'; $('#rCancel').style.display='inline-flex'; adminPanel.classList.add('open'); document.body.classList.add('admin-open'); }
+  $('#rDelete').onclick=()=>{ if(!currentReelId) return; if(!confirm('Delete this reel?')) return; data.reels=data.reels.filter(r=>r.id!==currentReelId); save(); currentReelId=null; clearReelForm(); renderAll(); updateReelCount(); };
+  $('#rCancel').onclick=()=>{ currentReelId=null; clearReelForm(); };
+  function clearReelForm(){ $('#rTitle').value=''; $('#rDesc').value=''; $('#rSourceType').value='auto'; refreshReelSelects(); $('#rLink').value=''; $('#rUpload').value=''; $('#rPreview').style.display='none'; $('#rDelete').style.display='none'; $('#rCancel').style.display='none'; }
+  function updateReelCount(){ $('#reelCount').textContent=data.reels.length; }
+  $('#rClear').onclick=()=>{ if(confirm('Remove all reels?')){ data.reels=[]; save(); renderAll(); updateReelCount(); } };
+
+  async function playReelBlock(btn){ const wrap=btn.closest('.reel'); const rid=wrap.getAttribute('data-reel-id'); const r=data.reels.find(x=>x.id===rid); const canv=wrap.querySelector('canvas');
+    if(!r){ btn.disabled=true; return; }
+    btn.textContent='Loading…'; btn.disabled=true;
+    if(r.mode==='upload' && r.video){ replaceWithVideo(wrap, canv, r.video); btn.textContent='Replay'; btn.disabled=false; return; }
+    if(r.mode==='media'){
+      const m=getMediaById(r.mediaId);
+      if(m){ if(m.type==='video'){ replaceWithVideo(wrap, canv, m.src); } else { // image → synth reel
+          const faux={name:r.title, desc:r.desc||'', price:0, cat:'rings', img:m.src};
+          const blob=await makeReelFromProduct(faux); const url=URL.createObjectURL(blob); replaceWithVideo(wrap, canv, url);
+        }
+        btn.textContent='Replay'; btn.disabled=false; return;
+      }
+    }
+    // auto or product
+    let prod=null;
+    if(r.mode==='product' && r.refId){ prod=data.products.find(p=>p.id===r.refId); }
+    if(!prod){ prod=data.products[0]; }
+    const blob=await makeReelFromProduct(prod); const url=URL.createObjectURL(blob); replaceWithVideo(wrap, canv, url); btn.textContent='Replay'; btn.disabled=false;
+  }
+  function replaceWithVideo(wrap, canv, url){ const video=document.createElement('video'); video.src=url; video.autoplay=true; video.loop=true; video.muted=true; if(canv) wrap.replaceChild(video,canv); else wrap.appendChild(video); }
+
+  // ----- Media tab (NEW) -----
+  async function addMediaFromFile(file, type){ const src=URL.createObjectURL(file); data.media.unshift({id:id(), type, name:file.name, src}); save(); renderMedia(); refreshReelSelects(); }
+  $('#mUploadImg').addEventListener('change', e=>{ const f=e.target.files[0]; if(f) addMediaFromFile(f,'image'); });
+  $('#mUploadVid').addEventListener('change', e=>{ const f=e.target.files[0]; if(f) addMediaFromFile(f,'video'); });
+  function renderMedia(){ const grid=$('#mediaGrid'); grid.innerHTML=data.media.map(m=>`<div class="media-tile" data-mid="${m.id}">${ m.type==='image'?`<img src="${m.src}" alt="${m.name}">`:`<video src="${m.src}" muted></video>`}<div style="display:flex; align-items:center; justify-content:space-between; padding:8px"><span class="small">${m.name||m.id}</span><button class="btn danger" onclick="deleteMedia('${m.id}')">Delete</button></div></div>`).join(''); }
+  function deleteMedia(idm){ data.media=data.media.filter(x=>x.id!==idm); save(); renderMedia(); refreshReelSelects(); }
 
   // ---------- Navigation ----------
   function show(page){ state.page=page; ['home','products','about'].forEach(p=>{ document.getElementById('page-'+p).hidden=(p!==page); }); $$('#nav a').forEach(a=> a.classList.toggle('active', a.dataset.page===page)); }
   window.addEventListener('hashchange', ()=>{ const p=(location.hash.replace('#','')||'home').toLowerCase(); show(['home','products','about'].includes(p)?p:'home'); });
 
-  // ---------- Interleaved reels ----------
-  async function playReel(btn){ const wrap=btn.closest('.reel'); const id=wrap.getAttribute('data-reel-for'); const p=data.products.find(x=>x.id===id)||data.products[0]; btn.textContent='Generating…'; btn.disabled=true; const blob=await makeReelFromProduct(p); const url=URL.createObjectURL(blob); const canv=wrap.querySelector('canvas'); const video=document.createElement('video'); video.src=url; video.autoplay=true; video.loop=true; video.muted=true; wrap.replaceChild(video,canv); btn.textContent='Replay'; btn.disabled=false; }
-
   // ---------- Editorial canvases ----------
   function drawHero(canvas){ const ctx=canvas.getContext('2d'); function draw(){ canvas.width=canvas.clientWidth*devicePixelRatio; canvas.height=canvas.clientHeight*devicePixelRatio; const w=canvas.width, h=canvas.height; const g=ctx.createLinearGradient(0,0,w,h); g.addColorStop(0,'#151515'); g.addColorStop(1,'#2a2822'); ctx.fillStyle=g; ctx.fillRect(0,0,w,h); ctx.strokeStyle='rgba(255,255,255,.08)'; for(let r=120;r<Math.min(w,h)/2;r+=22){ ctx.beginPath(); ctx.arc(w*.65,h*.55,r,0,Math.PI*2); ctx.stroke(); } requestAnimationFrame(draw); } requestAnimationFrame(draw); }
-  drawHero(document.getElementById('heroCanvas'));
   $$('.colCanvas').forEach(c=>{ const cat=c.dataset.cat; const img=new Image(); img.src=svgProduct(cat, cat.charAt(0).toUpperCase()+cat.slice(1)); img.onload=()=>{ const ctx=c.getContext('2d'); c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; ctx.drawImage(img,0,0,c.width,c.height); }; });
 
   // ---------- Hydrate & render ----------
   function ensureImages(){ data.products.forEach(p=>{ if(!p.img) p.img=svgProduct(p.cat,p.name); }); }
-  function hydrate(){ document.querySelector('.brand h1').textContent=data.brand; $('#aboutText').textContent=data.about; $('#missionText').textContent=data.mission; ensureImages(); renderAll(); }
+  function hydrate(){
+    // brand + hero + about
+    document.querySelector('.brand h1').textContent=data.brand;
+    $('#heroEyebrow').textContent=data.hero?.eyebrow||initial.hero.eyebrow;
+    $('#heroHeadline').textContent=data.hero?.headline||initial.hero.headline;
+    $('#heroSub').textContent=data.hero?.sub||initial.hero.sub;
+    $('#aboutText').textContent=data.about; $('#missionText').textContent=data.mission;
+    // admin inputs
+    $('#brandInput').value=data.brand; $('#aboutInput').value=data.about; $('#missionInput').value=data.mission;
+    $('#heroEyebrowInput').value=data.hero?.eyebrow||''; $('#heroHeadlineInput').value=data.hero?.headline||''; $('#heroSubInput').value=data.hero?.sub||'';
+    ensureImages(); renderAll(); renderMedia(); updateReelCount(); refreshReelSelects();
+  }
   function renderAll(){ renderGrid('homeGrid'); renderGrid('productsGrid'); renderCart(); }
 
+  function openAdminTab(name){ adminPanel.classList.add('open'); document.body.classList.add('admin-open'); $$('.tab').forEach(x=> x.classList.toggle('active', x.dataset.tab===name)); $$('[data-tabpanel]').forEach(p=>{ p.hidden = p.getAttribute('data-tabpanel')!==name; }); }
+
   // ---------- Init ----------
-  function init(){ hydrate(); if(!location.hash) location.hash='#home'; show((location.hash||'#home').replace('#','')); $('#openCart').onclick=()=>openDrawer(true); }
+  function init(){ drawHero(document.getElementById('heroCanvas')); hydrate(); if(!location.hash) location.hash='#home'; show((location.hash||'#home').replace('#','')); $('#openCart').onclick=()=>openDrawer(true); }
   init();
+
+  // ---------- Utils ----------
+  function id(){ return Math.random().toString(36).slice(2,9) }
+  function fileToDataURL(file){ return new Promise(res=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.readAsDataURL(file); }); }
+
+  // ---------- Export / Import ----------
+  $('#importFile').addEventListener('change', async e=>{ const f=e.target.files[0]; if(!f) return; const text=await f.text(); try{ const incoming=JSON.parse(text); data={...initial, ...incoming}; if(!data.cart) data.cart=[]; if(!data.media) data.media=[]; if(!data.reels) data.reels=[]; if(!data.hero) data.hero=initial.hero; save(); hydrate(); alert('Imported'); }catch{ alert('Could not read JSON'); } });
+  $('#exportBtn').onclick=()=>{ const out={...data}; const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='african-treasure-data.json'; a.click(); };
   </script>
 </body>
 </html>
